@@ -13,25 +13,42 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'DeliMeals',
-        theme: ThemeData(
-          canvasColor: const Color.fromRGBO(255, 254, 229, 1),
-          fontFamily: 'Raleway',
-          textTheme: ThemeData.light().textTheme.copyWith(
-                  titleLarge: const TextStyle(
-                fontSize: 20,
-                fontFamily: 'RobotoCondensed',
-              )),
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.pink,
-          ).copyWith(
-            secondary: Colors.amber,
-          ),
+      title: 'DeliMeals',
+      theme: ThemeData(
+        canvasColor: const Color.fromRGBO(255, 254, 229, 1),
+        fontFamily: 'Raleway',
+        textTheme: ThemeData.light().textTheme.copyWith(
+                titleLarge: const TextStyle(
+              fontSize: 20,
+              fontFamily: 'RobotoCondensed',
+            )),
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.pink,
+        ).copyWith(
+          secondary: Colors.amber,
         ),
-        routes: {
-          AppRoutes.home: (ctx) => const CategoriesScreen(),
-          AppRoutes.categoriesMeals: (ctx) => const CategoriesMealsScreen(),
-          AppRoutes.mealDetail:  (ctx) => const MealDetailScreen(),
-        });
+      ),
+      routes: {
+        AppRoutes.home: (ctx) => const CategoriesScreen(),
+        AppRoutes.categoriesMeals: (ctx) => const CategoriesMealsScreen(),
+        AppRoutes.mealDetail: (ctx) => const MealDetailScreen(),
+      },
+      // onGenerateRoute: (settings) {
+      //   if (settings.name == '/foo') {
+      //     return null;
+      //   } else if (settings.name == '/baz') {
+      //     return null;
+      //   } else {
+      //     return MaterialPageRoute(builder: (_) {
+      //       return const CategoriesScreen();
+      //     });
+      //   }
+      // },
+      // onUnknownRoute: (settings) {
+      //   return MaterialPageRoute(builder: (_) {
+      //     return const CategoriesScreen();
+      //   });
+      // },
+    );
   }
 }

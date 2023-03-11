@@ -1,19 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:meals/components/main_drawer.dart';
 
-class SettingsScreen extends StatelessWidget {
+import '../models/settings.dart';
+
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  var settings = Settings();
+
+  Widget _createSwitch(
+    String title,
+    String subtitle,
+    bool value,
+    Function(bool) onChanged,
+  ) {
+    return SwitchListTile(
+      title: Text(title),
+      subtitle: Text(subtitle),
+      value: value,
+      onChanged: onChanged,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Configuration'),
-      ),
-      drawer: const MainDrawer(),
-      body: const Center(
-        child: Text('Configuration!'),
-      ),
-    );
+        appBar: AppBar(
+          title: const Text('Configuration'),
+        ),
+        drawer: const MainDrawer(),
+        body: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              child: Text(
+                'Configuration',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
+            Expanded(
+                child: ListView(
+              children: [
+                _createSwitch(
+                  'Gluten-free',
+                  'It only displays gluten-free meals!',
+                  settings.isGlutenFree,
+                  (value) => setState(
+                    () => settings.isGlutenFree = value,
+                  ),
+                ),
+                _createSwitch(
+                  'Lactose-free',
+                  'It only displays lactose-free meals!',
+                  settings.isLactoseFree,
+                      (value) => setState(
+                        () => settings.isLactoseFree = value,
+                  ),
+                ),
+                _createSwitch(
+                  'Vegan-free',
+                  'It only displays vegan meals!',
+                  settings.isVegan,
+                      (value) => setState(
+                        () => settings.isVegan = value,
+                  ),
+                ),
+                _createSwitch(
+                  'Vegetarian-free',
+                  'It only displays vegetarian meals!',
+                  settings.isVegetarian,
+                      (value) => setState(
+                        () => settings.isVegetarian = value,
+                  ),
+                ),
+              ],
+            ))
+          ],
+        ));
   }
 }
